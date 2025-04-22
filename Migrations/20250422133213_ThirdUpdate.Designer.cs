@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -9,9 +10,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BNHA.Migrations
 {
     [DbContext(typeof(HeroContext))]
-    partial class HeroContextModelSnapshot : ModelSnapshot
+    [Migration("20250422133213_ThirdUpdate")]
+    partial class ThirdUpdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -54,21 +57,6 @@ namespace BNHA.Migrations
                     b.ToTable("Heroes");
                 });
 
-            modelBuilder.Entity("HeroPower", b =>
-                {
-                    b.Property<int>("OwnersId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PowersId")
-                        .HasColumnType("int");
-
-                    b.HasKey("OwnersId", "PowersId");
-
-                    b.HasIndex("PowersId");
-
-                    b.ToTable("HeroPower");
-                });
-
             modelBuilder.Entity("Power", b =>
                 {
                     b.Property<int>("Id")
@@ -80,6 +68,9 @@ namespace BNHA.Migrations
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("HeroId")
+                        .HasColumnType("int");
 
                     b.Property<int>("Level")
                         .HasColumnType("int");
@@ -93,6 +84,8 @@ namespace BNHA.Migrations
                         .HasColumnType("nvarchar(1)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("HeroId");
 
                     b.ToTable("Powers");
                 });
@@ -137,19 +130,16 @@ namespace BNHA.Migrations
                     b.Navigation("School");
                 });
 
-            modelBuilder.Entity("HeroPower", b =>
+            modelBuilder.Entity("Power", b =>
                 {
                     b.HasOne("Hero", null)
-                        .WithMany()
-                        .HasForeignKey("OwnersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany("Powers")
+                        .HasForeignKey("HeroId");
+                });
 
-                    b.HasOne("Power", null)
-                        .WithMany()
-                        .HasForeignKey("PowersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+            modelBuilder.Entity("Hero", b =>
+                {
+                    b.Navigation("Powers");
                 });
 
             modelBuilder.Entity("School", b =>

@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -9,9 +10,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BNHA.Migrations
 {
     [DbContext(typeof(HeroContext))]
-    partial class HeroContextModelSnapshot : ModelSnapshot
+    [Migration("20250422124120_SecondUpdate")]
+    partial class SecondUpdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -40,33 +43,13 @@ namespace BNHA.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(1)");
 
-                    b.Property<int>("SchoolId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Year")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("SchoolId");
-
                     b.ToTable("Heroes");
-                });
-
-            modelBuilder.Entity("HeroPower", b =>
-                {
-                    b.Property<int>("OwnersId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PowersId")
-                        .HasColumnType("int");
-
-                    b.HasKey("OwnersId", "PowersId");
-
-                    b.HasIndex("PowersId");
-
-                    b.ToTable("HeroPower");
                 });
 
             modelBuilder.Entity("Power", b =>
@@ -124,37 +107,6 @@ namespace BNHA.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Schools");
-                });
-
-            modelBuilder.Entity("Hero", b =>
-                {
-                    b.HasOne("School", "School")
-                        .WithMany("Heroes")
-                        .HasForeignKey("SchoolId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("School");
-                });
-
-            modelBuilder.Entity("HeroPower", b =>
-                {
-                    b.HasOne("Hero", null)
-                        .WithMany()
-                        .HasForeignKey("OwnersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Power", null)
-                        .WithMany()
-                        .HasForeignKey("PowersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("School", b =>
-                {
-                    b.Navigation("Heroes");
                 });
 #pragma warning restore 612, 618
         }

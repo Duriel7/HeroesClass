@@ -15,4 +15,8 @@ public class HeroContext : DbContext
     {    }
 
     public DbSet<Hero> Heroes { get; set; }
+
+    public DbSet<Power> Powers { get; set; }
+
+    public DbSet<School> Schools { get; set; }
 }
