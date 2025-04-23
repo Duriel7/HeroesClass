@@ -7,8 +7,6 @@ public class HeroContext : DbContext
 {
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        base.OnConfiguring(optionsBuilder);
-        optionsBuilder.UseSqlServer("Data Source = Duriel-Laptop; Initial Catalog = DurielHeroesClass; Integrated Security = True; Trust Server Certificate = True");
     }
     public HeroContext(DbContextOptions<HeroContext> options) : base(options)
     {
