@@ -10,7 +10,7 @@ builder.Services.AddControllersWithViews();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddDbContext<HeroContext>(options => options.UseSqlServer("Data Source = Duriel-Laptop; Initial Catalog = DurielHeroesClass; Integrated Security = True; Trust Server Certificate = True"));
+builder.Services.AddDbContext<HeroContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddScoped<IHeroService, HeroService>();
 
 var app = builder.Build();

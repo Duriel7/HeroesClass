@@ -1,9 +1,12 @@
-﻿using BNHA.Services;
+﻿using BNHA.Models.DTOs;
+using BNHA.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BNHA.Controllers
 {
+    [ApiController]
+    [Route("[controller]")]
     public class HeroController : Controller
     {
 
@@ -16,26 +19,32 @@ namespace BNHA.Controllers
 
 
         // GET: HeroController
-        public async Task<IActionResult> Index()
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<HeroDto>>> GetAllHeroes()
         {
             var heroes = await iService.GetAllHeroes();
-            return View(heroes);
+            return Ok(heroes);
         }
 
         // GET: HeroController/Details/5
-        public ActionResult Details(int id)
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Hero>> GetHero(int id)
         {
-            return View();
+            var hero = await iService.GetHeroById(id);
+            if (hero == null) return NotFound();
+            return Ok(hero);
         }
 
         // GET: HeroController/Create
-        public ActionResult Create()
+        [HttpPost]
+        public async Task<ActionResult<List<Hero>>> CreateHero(Hero hero)
         {
-            return View();
+            var heroes = await iService.AddHero(hero);
+            return Ok(heroes);
         }
 
         // POST: HeroController/Create
-        [HttpPost]
+/*        [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(IFormCollection collection)
         {
@@ -47,16 +56,16 @@ namespace BNHA.Controllers
             {
                 return View();
             }
-        }
+        }*/
 
         // GET: HeroController/Edit/5
-        public ActionResult Edit(int id)
+/*        public ActionResult Edit(int id)
         {
             return View();
-        }
+        }*/
 
         // POST: HeroController/Edit/5
-        [HttpPost]
+/*        [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, IFormCollection collection)
         {
@@ -68,16 +77,16 @@ namespace BNHA.Controllers
             {
                 return View();
             }
-        }
+        }*/
 
         // GET: HeroController/Delete/5
-        public ActionResult Delete(int id)
+/*        public ActionResult Delete(int id)
         {
             return View();
-        }
+        }*/
 
         // POST: HeroController/Delete/5
-        [HttpPost]
+/*        [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)
         {
@@ -89,6 +98,6 @@ namespace BNHA.Controllers
             {
                 return View();
             }
-        }
+        }*/
     }
 }

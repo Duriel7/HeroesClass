@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using BNHA.Models.DTOs;
+using Microsoft.EntityFrameworkCore;
 
 namespace BNHA.Services
 {
@@ -18,9 +19,26 @@ namespace BNHA.Services
             return await context.Heroes.Include(h => h.School).Include(h => h.Powers).ToListAsync();
         }
 
-        Task<List<Hero>> IHeroService.GetAllHeroes()
+        public async Task<List<HeroDto>> GetAllHeroes()
         {
-            throw new NotImplementedException();
+            return await context.Heroes
+                .Include(h => h.School).Include(h => h.Powers)
+                .Select(h => new HeroDto
+                {
+                    Id = h.Id,
+                    Name = h.Name,
+                    Description = h.Description,
+                    Year = h.Year,
+                    Rank = h.Rank,
+                    School = h.School != null ? h.School.Name : null,
+                    Powers = h.Powers.Select(p => p.Name).ToList()
+                })
+                .ToListAsync();
+        }
+
+        public async Task<Hero> GetHeroById(int id)
+        {
+            return await context.Heroes.Include(h => h.School).Include(h => h.Powers).FirstOrDefaultAsync(h => h.Id == id);
         }
     }
 }
