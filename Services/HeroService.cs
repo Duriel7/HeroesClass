@@ -2,7 +2,7 @@
 
 namespace BNHA.Services
 {
-    public class HeroService
+    public class HeroService : IHeroService
     {
         private readonly HeroContext context;
 
@@ -15,7 +15,12 @@ namespace BNHA.Services
         {
             context.Heroes.Add(hero);
             await context.SaveChangesAsync();
-            return await context.Heroes.ToListAsync();
+            return await context.Heroes.Include(h => h.School).Include(h => h.Powers).ToListAsync();
+        }
+
+        Task<List<Hero>> IHeroService.GetAllHeroes()
+        {
+            throw new NotImplementedException();
         }
     }
 }

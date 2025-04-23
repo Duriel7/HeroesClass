@@ -1,5 +1,4 @@
 ﻿using System;
-using Heroes;
 
 public class Power
 {

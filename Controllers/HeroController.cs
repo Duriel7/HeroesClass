@@ -1,14 +1,25 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using BNHA.Services;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BNHA.Controllers
 {
     public class HeroController : Controller
     {
-        // GET: HeroController
-        public ActionResult Index()
+
+        private readonly IHeroService iService;
+
+        public HeroController(IHeroService iHeroService)
         {
-            return View();
+            iService = iHeroService;
+        }
+
+
+        // GET: HeroController
+        public async Task<IActionResult> Index()
+        {
+            var heroes = await iService.GetAllHeroes();
+            return View(heroes);
         }
 
         // GET: HeroController/Details/5
