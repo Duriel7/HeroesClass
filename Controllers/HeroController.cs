@@ -34,6 +34,20 @@ namespace BNHA.Controllers
             if (hero == null) return NotFound();
             return Ok(hero);
         }
+        [HttpGet("{id}")]
+        public async Task<ActionResult<School>> GetSchool(int id)
+        {
+            var school = await iService.GetSchoolById(id);
+            if (school == null) return NotFound();
+            return Ok(school);
+        }
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Power>> GetPower(int id)
+        {
+            var power = await iService.GetPowerById(id);
+            if (power == null) return NotFound();
+            return Ok(power);
+        }
 
         // GET: HeroController/Create
         [HttpPost]
@@ -41,6 +55,18 @@ namespace BNHA.Controllers
         {
             var heroes = await iService.AddHero(hero);
             return Ok(heroes);
+        }
+        [HttpPost]
+        public async Task<ActionResult<List<School>>> CreateSchool(School school)
+        {
+            var schools = await iService.AddSchool(school);
+            return Ok(schools);
+        }
+        [HttpPost]
+        public async Task<ActionResult<List<Power>>> CreatePower(Power power)
+        {
+            var powers = await iService.AddPower(power);
+            return Ok(powers);
         }
 
         // POST: HeroController/Create

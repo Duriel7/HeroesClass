@@ -8,11 +8,11 @@ namespace BNHA.Services
         Task<List<HeroDto>> GetAllHeroes();
         Task<List<HeroDto>> AddHero(Hero hero);
         Task<HeroDto> GetHeroById(int id);
-        Task<List<HeroDto>> GetAllSchools();
-        Task<List<HeroDto>> AddSchool(School school);
-        Task<HeroDto> GetSchoolById(int id);
-        Task<List<HeroDto>> GetAllPowers();
-        Task<List<HeroDto>> AddPower(Power power);
-        Task<HeroDto> GetPowerById(int id);
+        Task<List<SchoolDto>> GetAllSchools();
+        Task<List<SchoolDto>> AddSchool(School school);
+        Task<SchoolDto> GetSchoolById(int id);
+        Task<List<PowerDto>> GetAllPowers();
+        Task<List<PowerDto>> AddPower(Power power);
+        Task<PowerDto> GetPowerById(int id);
     }
 }
