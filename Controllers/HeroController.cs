@@ -19,29 +19,43 @@ namespace BNHA.Controllers
 
 
         // GET: HeroController
-        [HttpGet]
+        [HttpGet("heroes")]
         public async Task<ActionResult<IEnumerable<HeroDto>>> GetAllHeroes()
         {
             var heroes = await iService.GetAllHeroes();
             return Ok(heroes);
         }
 
+        [HttpGet("schools")]
+        public async Task<ActionResult<IEnumerable<SchoolDto>>> GetAllSchools()
+        {
+            var schools = await iService.GetAllSchools();
+            return Ok(schools);
+        }
+
+        [HttpGet("powers")]
+        public async Task<ActionResult<IEnumerable<PowerDto>>> GetAllPowers()
+        {
+            var powers = await iService.GetAllPowers();
+            return Ok(powers);
+        }
+
         // GET: HeroController/Details/5
-        [HttpGet("{id}")]
+        [HttpGet("hero/{id}")]
         public async Task<ActionResult<Hero>> GetHero(int id)
         {
             var hero = await iService.GetHeroById(id);
             if (hero == null) return NotFound();
             return Ok(hero);
         }
-        [HttpGet("{id}")]
+        [HttpGet("school/{id}")]
         public async Task<ActionResult<School>> GetSchool(int id)
         {
             var school = await iService.GetSchoolById(id);
             if (school == null) return NotFound();
             return Ok(school);
         }
-        [HttpGet("{id}")]
+        [HttpGet("power/{id}")]
         public async Task<ActionResult<Power>> GetPower(int id)
         {
             var power = await iService.GetPowerById(id);
@@ -50,19 +64,19 @@ namespace BNHA.Controllers
         }
 
         // GET: HeroController/Create
-        [HttpPost]
+        [HttpPost("hero")]
         public async Task<ActionResult<List<Hero>>> CreateHero(Hero hero)
         {
             var heroes = await iService.AddHero(hero);
             return Ok(heroes);
         }
-        [HttpPost]
+        [HttpPost("school")]
         public async Task<ActionResult<List<School>>> CreateSchool(School school)
         {
             var schools = await iService.AddSchool(school);
             return Ok(schools);
         }
-        [HttpPost]
+        [HttpPost("power")]
         public async Task<ActionResult<List<Power>>> CreatePower(Power power)
         {
             var powers = await iService.AddPower(power);
