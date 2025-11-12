@@ -9,6 +9,7 @@ namespace BNHA.Models
         public string Description { get; set; }
         public int Level { get; set; }
         public char Rank { get; set; }
+        public int HeroId { get; set; }
         public virtual Hero Owner { get; set; }
         public Power()
         {

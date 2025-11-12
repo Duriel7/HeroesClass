@@ -11,7 +11,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<HeroContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-builder.Services.AddScoped<IHeroService, HeroService>();
+builder.Services.AddScoped<IMultiService, MultiService>();
 
 var app = builder.Build();
 

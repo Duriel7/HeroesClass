@@ -1,9 +1,9 @@
-﻿using BNHA.Models.DTOs;
+﻿using BNHA.DTOs;
 using Microsoft.EntityFrameworkCore;
 
 namespace BNHA.Services
 {
-    public interface IHeroService
+    public interface IMultiService
     {
         Task<List<HeroDto>> GetAllHeroes();
         Task<List<HeroDto>> AddHero(Hero hero);

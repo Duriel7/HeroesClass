@@ -1,13 +1,13 @@
-﻿using BNHA.Models.DTOs;
+﻿using BNHA.DTOs;
 using Microsoft.EntityFrameworkCore;
 
 namespace BNHA.Services
 {
-    public class HeroService : IHeroService
+    public class MultiService : IMultiService
     {
         private readonly HeroContext context;
 
-        public HeroService(HeroContext heroContext)
+        public MultiService(HeroContext heroContext)
         {
             context = heroContext;
         }

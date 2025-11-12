@@ -10,11 +10,11 @@ namespace BNHA.Controllers
     public class HeroController : Controller
     {
 
-        private readonly IHeroService iService;
+        private readonly IMultiService iService;
 
-        public HeroController(IHeroService iHeroService)
+        public HeroController(IMultiService IMultiService)
         {
-            iService = iHeroService;
+            iService = IMultiService;
         }
 
 
