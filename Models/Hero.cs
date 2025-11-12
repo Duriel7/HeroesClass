@@ -9,6 +9,7 @@ namespace BNHA.Models
         public string Description { get; set; }
         public string Year { get; set; }
         public char Rank { get; set; }
+        public int SchoolId { get; set; }
         public virtual School School { get; set; }
         public virtual ICollection<Power> Powers { get; set; }
 
