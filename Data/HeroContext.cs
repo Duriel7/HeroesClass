@@ -8,6 +8,7 @@ public class HeroContext : DbContext
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
     }
+
     public HeroContext(DbContextOptions<HeroContext> options) : base(options)
     {
     }

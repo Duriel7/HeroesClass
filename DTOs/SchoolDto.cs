@@ -1,4 +1,4 @@
-﻿namespace BNHA.Models.DTOs
+﻿namespace BNHA.DTOs
 {
     public class SchoolDto
     {
