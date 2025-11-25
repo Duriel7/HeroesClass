@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
 using Microsoft.EntityFrameworkCore;
+using BNHA.Models;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 public class HeroContext : DbContext

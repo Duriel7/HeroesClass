@@ -1,4 +1,5 @@
-﻿using BNHA.DTOs;
+﻿using BNHA.Models;
+using BNHA.DTOs;
 using Microsoft.EntityFrameworkCore;
 
 namespace BNHA.Services

@@ -1,4 +1,5 @@
-﻿using BNHA.DTOs;
+﻿using BNHA.Models;
+using BNHA.DTOs;
 using Microsoft.EntityFrameworkCore;
 
 namespace BNHA.Services
@@ -49,14 +50,14 @@ namespace BNHA.Services
         {
             context.Powers.Add(power);
             await context.SaveChangesAsync();
-            return await context.Powers.Include(p => p.Owners)
+            return await context.Powers.Include(p => p.Owner)
                 .Select(p => new PowerDto
                 {
                     Id = p.Id,
                     Name = p.Name,
                     Description = p.Description,
                     Rank = p.Rank,
-                    Owners = p.Owners.Select(h => h.Name).ToList()
+                    Owner = p.Owner != null ? p.Owner.Name : null,
                 }).ToListAsync();
         }
 
@@ -93,14 +94,14 @@ namespace BNHA.Services
         public async Task<List<PowerDto>> GetAllPowers()
         {
             return await context.Powers
-                .Include(o => o.Owners)
+                .Include(o => o.Owner)
                 .Select(p => new PowerDto
                 {
                     Id = p.Id,
                     Name = p.Name,
                     Description = p.Description,
-                    Rank =p.Rank,
-                    Owners = p.Owners.Select(o => o.Name).ToList()
+                    Rank = p.Rank,
+                    Owner = p.Owner != null ? p.Owner.Name : null,
                 }).ToListAsync();
         }
 
@@ -144,7 +145,7 @@ namespace BNHA.Services
                     Name = p.Name,
                     Description = p.Description,
                     Rank = p.Rank,
-                    Owners = p.Owners.Select(o => o.Name).ToList()
+                    Owner = p.Owner != null ? p.Owner.Name : null,
                 })
                 .FirstAsync(p => p.Id == id);
         }

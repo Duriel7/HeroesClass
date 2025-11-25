@@ -1,5 +1,6 @@
-﻿using BNHA.Models.DTOs;
+﻿using BNHA.DTOs;
 using BNHA.Services;
+using BNHA.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
